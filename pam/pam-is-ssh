@@ -1,0 +1,14 @@
+#!/bin/sh
+# SPDX-License-Identifier: LGPL-2.1-or-later
+# pam-is-ssh: exit 0 if the current PAM conversation runs inside an SSH
+# session (an ancestor process is sshd / sshd-session), otherwise exit 1.
+# Used via pam_exec to skip the local hardware token for sudo over SSH.
+pid=$PPID
+while [ "${pid:-0}" -gt 1 ]; do
+    comm=$(cat "/proc/$pid/comm" 2>/dev/null) || exit 1
+    case "$comm" in
+        sshd|sshd-session|sshd-auth) exit 0 ;;
+    esac
+    pid=$(awk '/^PPid:/ {print $2}' "/proc/$pid/status" 2>/dev/null)
+done
+exit 1

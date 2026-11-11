@@ -1,0 +1,25 @@
+# build output
+/build/
+*.o
+*.so
+*.a
+/tools/zkprobe
+/tools/zkctl
+
+# proprietary vendor SDK (never commit)
+/SDK/
+
+# local libfprint checkout used for development
+/libfprint/
+
+# makepkg artifacts
+/packaging/src/
+/packaging/pkg/
+/packaging/libfprint/
+*.pkg.tar.*
+
+# local tool/editor state
+/.claude/
+/.github/modernize/
+*.pgm
+*.bmp

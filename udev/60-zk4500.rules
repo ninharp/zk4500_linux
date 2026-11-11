@@ -1,0 +1,2 @@
+# ZKSoftware ZK4500 fingerprint reader: allow logged-in user (uaccess) and group plugdev
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1b55", ATTRS{idProduct}=="0840", MODE="0660", GROUP="plugdev", TAG+="uaccess"
